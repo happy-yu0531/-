@@ -10,7 +10,7 @@ import os
 import numpy as np
 
 
-url_base = 'http://yann.lecun.com/exdb/mnist/'   
+url_base = 'http://yann.lecun.com/exdb/mnist/'    #minist数据集的网站
 key_file = {
     'train_img':'train-images-idx3-ubyte.gz',
     'train_label':'train-labels-idx1-ubyte.gz',
@@ -47,8 +47,8 @@ def _load_label(file_name):
     file_path = dataset_dir + "/" + file_name
     
     print("Converting " + file_name + " to NumPy Array ...")
-    with gzip.open(file_path, 'rb') as f:
-            labels = np.frombuffer(f.read(), np.uint8, offset=8)
+    with gzip.open(file_path, 'rb') as f:             #读取压缩文件
+            labels = np.frombuffer(f.read(), np.uint8, offset=8)     
     print("Done")
     
     return labels
@@ -75,7 +75,7 @@ def _convert_numpy():
 
 def init_mnist():
     download_mnist()    #下载数据集
-    dataset = _convert_numpy()
+    dataset = _convert_numpy()    #将下载到所有数据以字典的形式存在一个变量里
     print("Creating pickle file ...")
     with open(save_file, 'wb') as f:
         pickle.dump(dataset, f, -1)
